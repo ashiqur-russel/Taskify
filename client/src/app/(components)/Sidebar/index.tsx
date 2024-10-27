@@ -3,8 +3,9 @@ import { useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
 import {
   Briefcase,
+  ChevronDown,
+  ChevronUp,
   Home,
-  HomeIcon,
   Lock,
   Search,
   Settings,
@@ -13,17 +14,13 @@ import {
   X,
 } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import SidebarLink from "../SiderBarLink";
 
 function Sidebar() {
-  {
-    /**
-    const [showProjects, setShowProjects] = useState(true);
-    const [showPriority, setshowPriority] = useState(true);
-    */
-  }
+  const [showProjects, setShowProjects] = useState(true);
+  const [showPriority, setshowPriority] = useState(true);
 
   const dispatch = useDispatch();
   const isSidebarCollapsed = useAppSelector(
@@ -80,6 +77,28 @@ function Sidebar() {
           <SidebarLink icon={User} label="Users" href="/users" />
           <SidebarLink icon={Users} label="Teams" href="/teams" />
         </nav>
+
+        <div>
+          {" "}
+          <button
+            onClick={() => setShowProjects((prev) => !prev)}
+            className="3 flex w-full items-center justify-between px-8 py-4 text-gray-500"
+          >
+            <span>Projects</span>
+            {showProjects ? <ChevronUp /> : <ChevronDown />}
+          </button>
+        </div>
+
+        <div>
+          {" "}
+          <button
+            onClick={() => setshowPriority((prev) => !prev)}
+            className="3 flex w-full items-center justify-between px-8 py-4 text-gray-500"
+          >
+            <span>Meetings</span>
+            {showPriority ? <ChevronUp /> : <ChevronDown />}
+          </button>
+        </div>
       </div>
     </div>
   );
