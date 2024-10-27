@@ -18,8 +18,10 @@ function Sidebar() {
     <div className={siderBarClassName}>
       <div className="flex h-[100%] w-full flex-col justify-start">
         <div className="z-50 flex min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">
-          <div className="animate-pulse text-xl font-bold text-gray-800 dark:text-white">
-            TASKiFY
+          <div className="text-xl font-bold text-gray-800 text-transparent dark:text-white">
+            <h1 className="animate-gradient bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-2xl font-bold text-transparent">
+              TASKiFY
+            </h1>
           </div>
         </div>
         <div className="flex items-center gap-4 border-y-[1.5px] border-gray-200 px-7 py-4 dark:text-white">
