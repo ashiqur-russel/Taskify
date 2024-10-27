@@ -1,19 +1,46 @@
-import React from "react";
+"user client";
+
+import React, { useEffect } from "react";
 import Navbar from "./(components)/Navbar";
 import Sidebar from "./(components)/Sidebar";
+import StoreProvider, { useAppSelector } from "./redux";
 
-const Dashboard = ({ children }: { children: React.ReactNode }) => {
+export const DashboardLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const isSideBarCollapsed = useAppSelector(
+    (state) => state.global.isSidebarCollapsed,
+  );
+  const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  });
+
   return (
     <div className="text-gray-90 flex min-h-screen w-full bg-gray-50 text-gray-900">
       <Sidebar />
       <main
-        className={`dark:bg-dark-bg flex w-full flex-col bg-gray-50 md:pl-64`}
+        className={`flex w-full flex-col bg-gray-50 dark:bg-dark-bg md:pl-64`}
       >
-        {/* nav */}
         <Navbar />
         {children}
       </main>
     </div>
+  );
+};
+
+const Dashboard = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <StoreProvider>
+      <DashboardLayout>{children}</DashboardLayout>
+    </StoreProvider>
   );
 };
 
