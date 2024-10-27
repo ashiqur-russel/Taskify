@@ -1,4 +1,0 @@
-0000000000000000000000000000000000000000 d57d402b9db06749348f9c16724b2f260eaa99d4 ashiqurras <ashiqurrussel2@gmail.com> 1729986091 +0200	commit (initial): Initial commit from Create Next App
-d57d402b9db06749348f9c16724b2f260eaa99d4 20e7ecf1f9737226f5bbe10defa6a3b8e52a3504 ashiqurras <ashiqurrussel2@gmail.com> 1729987365 +0200	commit: inital project setup, tailwind custom config setup
-20e7ecf1f9737226f5bbe10defa6a3b8e52a3504 5cf6444f6239b6eefbfb85ffe0d70ac2feb09471 ashiqurras <ashiqurrussel2@gmail.com> 1729990191 +0200	commit: Design navbar basic layout
-5cf6444f6239b6eefbfb85ffe0d70ac2feb09471 7a49ccedc5fab73b1abc093e3846bed38ff8c2a2 ashiqurras <ashiqurrussel2@gmail.com> 1729991913 +0100	commit: Add sidebar layout
