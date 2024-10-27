@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Moon, MoonStar, Search, Settings } from "lucide-react";
+import { Menu, Moon, MoonStar, Search, Settings, Sun } from "lucide-react";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsDarkMode, setIsSidebarCollapsed } from "@/state";
@@ -37,7 +37,7 @@ function Navbar() {
             className={`cursor-pointer ${isDarkMode ? "text-gray-400" : "text-yellow-500"}`}
           />
         ) : (
-          <MoonStar
+          <Sun
             onClick={() => dispatch(setIsDarkMode(!isDarkMode))}
             className={`cursor-pointer ${isDarkMode ? "text-gray-400" : "text-yellow-500"}`}
           />

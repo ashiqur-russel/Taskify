@@ -1,7 +1,10 @@
 "use client";
-import { Lock } from "lucide-react";
+import { useAppSelector } from "@/app/redux";
+import { setIsSidebarCollapsed } from "@/state";
+import { Lock, X } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { useDispatch } from "react-redux";
 
 function Sidebar() {
   {
@@ -11,8 +14,15 @@ function Sidebar() {
   */
   }
 
+  const dispatch = useDispatch();
+  const isSidebarCollapsed = useAppSelector(
+    (state) => state.global.isSidebarCollapsed,
+  );
+
   const siderBarClassName = `fixed flex flex-col h-[100%] justify-between shadow-xl
-  transition-all duration-300 h-full z-40 dark:bg-black overfloy-y-auto bg-white w-64`;
+    transition-transform duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white
+    ${isSidebarCollapsed ? "-translate-x-full" : "translate-x-0"}
+  `;
 
   return (
     <div className={siderBarClassName}>
@@ -23,6 +33,16 @@ function Sidebar() {
               TASKiFY
             </h1>
           </div>
+          {isSidebarCollapsed ? null : (
+            <button
+              className="py-3"
+              onClick={() =>
+                dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))
+              }
+            >
+              <X className="h-5 w-5 cursor-pointer font-bold text-black hover:text-gray-500 dark:text-gray-50"></X>
+            </button>
+          )}
         </div>
         <div className="flex items-center gap-4 border-y-[1.5px] border-gray-200 px-7 py-4 dark:text-white">
           <Image src="/logo.png" alt="logo" width={35} height={35} />
