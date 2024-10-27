@@ -2,13 +2,18 @@
 import { useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
 import {
+  AlertCircle,
+  AlertOctagon,
+  AlertTriangle,
   Briefcase,
   ChevronDown,
   ChevronUp,
   Home,
+  Layers3,
   Lock,
   Search,
   Settings,
+  ShieldAlert,
   User,
   Users,
   X,
@@ -43,12 +48,12 @@ function Sidebar() {
           </div>
           {isSidebarCollapsed ? null : (
             <button
-              className="py-3"
+              className="rounded-xl border-none bg-slate-50 text-2xl shadow-lg hover:bg-gray-500"
               onClick={() =>
                 dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))
               }
             >
-              <X className="h-5 w-5 cursor-pointer font-bold text-black hover:text-gray-500 dark:text-gray-50"></X>
+              <X className="hover:text-black-500 h-5 w-5 cursor-pointer text-xl font-bold text-black hover:text-white dark:text-gray-50"></X>
             </button>
           )}
         </div>
@@ -98,6 +103,35 @@ function Sidebar() {
             <span>Meetings</span>
             {showPriority ? <ChevronUp /> : <ChevronDown />}
           </button>
+          {showPriority && (
+            <>
+              <SidebarLink
+                icon={AlertCircle}
+                label="Urgent"
+                href="/priority/urgent"
+              />
+              <SidebarLink
+                icon={ShieldAlert}
+                label="High"
+                href="/priority/high"
+              />
+              <SidebarLink
+                icon={AlertTriangle}
+                label="Medium"
+                href="/priority/medium"
+              />
+              <SidebarLink
+                icon={AlertOctagon}
+                label="Low"
+                href="/priority/low"
+              />
+              <SidebarLink
+                icon={Layers3}
+                label="Backlog"
+                href="/priority/backlog"
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

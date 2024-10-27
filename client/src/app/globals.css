@@ -1,9 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 *,
 *::before,
 *::after {
@@ -17,19 +14,21 @@ body,
   height: 100%;
   width: 100%;
   @apply text-sm;
-  @apply bg-gray-500;
-  @apply text-gray-900;
-  @keyframes gradientAnimation {
-    0%,
-    100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
+  @apply bg-white;
+  @apply bg-black;
+}
+
+@keyframes gradientAnimation {
+  0%,
+  100% {
+    background-position: 0% 50%;
   }
-  .animate-gradient {
-    background-size: 200% 200%;
-    animation: gradientAnimation 3s ease infinite;
+  50% {
+    background-position: 100% 50%;
   }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientAnimation 3s ease infinite;
 }
