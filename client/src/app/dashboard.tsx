@@ -1,4 +1,4 @@
-"user client";
+"use client";
 
 import React, { useEffect } from "react";
 import Navbar from "./(components)/Navbar";
@@ -27,7 +27,9 @@ export const DashboardLayout = ({
     <div className="text-gray-90 flex min-h-screen w-full bg-gray-50 text-gray-900">
       <Sidebar />
       <main
-        className={`flex w-full flex-col bg-gray-50 dark:bg-dark-bg md:pl-64`}
+        className={`flex w-full flex-col bg-gray-50 dark:bg-dark-bg ${
+          isSideBarCollapsed ? "" : "md:pl-64"
+        }`}
       >
         <Navbar />
         {children}
@@ -36,7 +38,7 @@ export const DashboardLayout = ({
   );
 };
 
-const Dashboard = ({ children }: { children: React.ReactNode }) => {
+const DashboardWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <StoreProvider>
       <DashboardLayout>{children}</DashboardLayout>
@@ -44,4 +46,4 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Dashboard;
+export default DashboardWrapper;

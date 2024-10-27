@@ -1,11 +1,15 @@
 "use client";
 import { Lock } from "lucide-react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 
 function Sidebar() {
-  const [showProjects, setShowProjects] = useState(true);
+  {
+    /**
+    const [showProjects, setShowProjects] = useState(true);
   const [showPriority, setshowPriority] = useState(true);
+  */
+  }
 
   const siderBarClassName = `fixed flex flex-col h-[100%] justify-between shadow-xl
   transition-all duration-300 h-full z-40 dark:bg-black overfloy-y-auto bg-white w-64`;
