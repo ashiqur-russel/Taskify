@@ -1,17 +1,28 @@
 "use client";
 import { useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
-import { Lock, X } from "lucide-react";
+import {
+  Briefcase,
+  Home,
+  HomeIcon,
+  Lock,
+  Search,
+  Settings,
+  User,
+  Users,
+  X,
+} from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { useDispatch } from "react-redux";
+import SidebarLink from "../SiderBarLink";
 
 function Sidebar() {
   {
     /**
     const [showProjects, setShowProjects] = useState(true);
-  const [showPriority, setshowPriority] = useState(true);
-  */
+    const [showPriority, setshowPriority] = useState(true);
+    */
   }
 
   const dispatch = useDispatch();
@@ -60,6 +71,15 @@ function Sidebar() {
             </div>
           </div>
         </div>
+
+        <nav className="z-10 w-full">
+          <SidebarLink icon={Home} label="Home" href="/" />
+          <SidebarLink icon={Briefcase} label="Timeline" href="/timeline" />
+          <SidebarLink icon={Search} label="Search" href="/search" />
+          <SidebarLink icon={Settings} label="Settings" href="/settings" />
+          <SidebarLink icon={User} label="Users" href="/users" />
+          <SidebarLink icon={Users} label="Teams" href="/teams" />
+        </nav>
       </div>
     </div>
   );
