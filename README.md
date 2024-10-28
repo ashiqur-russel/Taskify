@@ -10,7 +10,7 @@ TASKiFY is a project management dashboard app built with **Next.js**. It allows 
     <br />
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://next-taskify-livid.vercel.app/">View Demo</a>
     ·
     <a href="https://github.com/ashiqur-russel/Next-Taskify/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
