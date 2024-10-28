@@ -15,16 +15,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      # Specify the Node.js version and use caching
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - name: Navigate to client folder
-        run: cd client
+
+      # Install dependencies in the client folder
       - run: npm ci
         working-directory: ./client
+
+      # Build the project (if applicable) in the client folder
       - run: npm run build --if-present
         working-directory: ./client
+
+      # Run tests in the client folder
       - run: npm test
         working-directory: ./client
