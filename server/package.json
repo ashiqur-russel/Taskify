@@ -10,7 +10,7 @@
     "seed": "ts-node --transpile-only prisma/seed.ts",
     "postinstall": "prisma generate",
     "vercel-build": "prisma generate && npm run prisma-generate-and-migrate && npm run build",
-    "prisma-generate-and-migrate": "prisma migrate deploy"
+    "prisma-generate-and-migrate": "prisma migrate deploy npm run seed"
   },
   "keywords": [],
   "author": "",
