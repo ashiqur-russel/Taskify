@@ -1,7 +1,23 @@
 import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import path from "path";
-const prisma = new PrismaClient();
+
+const prisma = new PrismaClient({
+  log: ["query", "info", "warn", "error"],
+});
+
+// Connect Prisma and handle errors gracefully.
+async function connectPrisma() {
+  try {
+    await prisma.$connect();
+    console.log("Prisma connected");
+  } catch (err) {
+    console.error("Error connecting to Prisma", err);
+    process.exit(1);
+  }
+}
+
+connectPrisma();
 
 async function deleteAllData(orderedFileNames: string[]) {
   const modelNames = orderedFileNames.map((fileName) => {
@@ -55,4 +71,7 @@ async function main() {
 
 main()
   .catch((e) => console.error(e))
-  .finally(async () => await prisma.$disconnect());
+  .finally(async () => {
+    await prisma.$disconnect();
+    console.log("Prisma disconnected");
+  });
