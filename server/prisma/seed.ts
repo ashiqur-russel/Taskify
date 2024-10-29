@@ -3,9 +3,24 @@ import { PrismaClient } from "../prisma/generated/client";
 import fs from "fs";
 import path from "path";
 
-const prisma = new PrismaClient({
-  log: ["query", "info", "warn", "error"],
-});
+let prisma: PrismaClient;
+declare global {
+  var prisma: PrismaClient | undefined;
+}
+
+// Use a global `prisma` in development to avoid re-instantiating it on every request (helpful for serverless).
+if (process.env.NODE_ENV === "production") {
+  prisma = new PrismaClient({
+    log: ["query", "info", "warn", "error"],
+  });
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient({
+      log: ["query", "info", "warn", "error"],
+    });
+  }
+  prisma = global.prisma;
+}
 
 // Connect Prisma and handle errors gracefully.
 async function connectPrisma() {
