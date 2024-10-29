@@ -1,5 +1,5 @@
 // Or from '@reduxjs/toolkit/query/react'
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface Project {
   id: number;
@@ -63,9 +63,15 @@ export interface Task {
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
-  endpoints: () => ({}),
+  tagTypes: ["Projects", "Tasks", "Users", "Teams"],
   reducerPath: "api",
-  tagTypes: [],
+
+  endpoints: (build) => ({
+    getProjects: build.query<Project[], void>({
+      query: () => "projects",
+      providesTags: ["Projects"],
+    }),
+  }),
 });
 
-export const {} = api;
+export const { useGetProjectsQuery } = api;

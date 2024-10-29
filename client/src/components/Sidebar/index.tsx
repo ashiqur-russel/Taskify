@@ -22,12 +22,15 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import SidebarLink from "../SiderBarLink";
+import { useGetProjectsQuery } from "@/state/api";
 
 function Sidebar() {
   const [showProjects, setShowProjects] = useState(true);
   const [showPriority, setshowPriority] = useState(true);
 
   const dispatch = useDispatch();
+  const { data: projects = [] } = useGetProjectsQuery();
+
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed,
   );
@@ -92,6 +95,15 @@ function Sidebar() {
             <span>Projects</span>
             {showProjects ? <ChevronUp /> : <ChevronDown />}
           </button>
+          {showProjects &&
+            projects?.map((project) => (
+              <SidebarLink
+                key={project.id}
+                icon={Briefcase}
+                label={project.name}
+                href={`/projects/${project.id}`}
+              />
+            ))}
         </div>
 
         <div>
