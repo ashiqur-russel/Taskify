@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && npx tsc && npx prisma db push && npx prisma generate ",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && npx tsc",
     "start": "npm run build && node dist/index.js",
     "dev": "npm run build && concurrently \"npx tsc -w\" \"nodemon --exec ts-node src/index.ts\"",
-    "seed": "ts-node --transpile-only prisma/seed.ts",
-    "vercel-build": "prisma generate && npm run prisma-generate-and-migrate && npm run build",
-    "prisma-generate-and-migrate": "prisma migrate deploy npm run seed"
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
