@@ -193,7 +193,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/ashiq/Desktop/project/project-management/server/prisma/generated/client",
+      "value": "/Users/ashiq/Desktop/project/taskify/Next-Taskify/server/prisma/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -207,12 +207,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/ashiq/Desktop/project/project-management/server/prisma/schema.prisma",
+    "sourceFilePath": "/Users/ashiq/Desktop/project/taskify/Next-Taskify/server/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../..",
   "clientVersion": "5.21.1",
@@ -221,17 +220,17 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL_PRISMA_URL",
+        "fromEnvVar": "DATABASE_URL",
         "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL_PRISMA_URL\") // uses connection pooling\n  directUrl = env(\"DATABASE_URL_URL_NON_POOLING\") // uses a direct connection\n}\n\nmodel User {\n  userId            Int     @id @default(autoincrement())\n  cognitoId         String  @unique\n  username          String  @unique\n  profilePictureUrl String?\n  teamId            Int?\n\n  authoredTasks   Task[]           @relation(\"TaskAuthor\")\n  assignedTasks   Task[]           @relation(\"TaskAssignee\")\n  taskAssignments TaskAssignment[]\n  attachments     Attachment[]\n  comments        Comment[]\n  team            Team?            @relation(fields: [teamId], references: [id])\n}\n\nmodel Team {\n  id                   Int           @id @default(autoincrement())\n  teamName             String\n  productOwnerUserId   Int?\n  projectManagerUserId Int?\n  projectTeams         ProjectTeam[]\n  user                 User[]\n}\n\nmodel Project {\n  id           Int           @id @default(autoincrement())\n  name         String\n  description  String?\n  startDate    DateTime?\n  endDate      DateTime?\n  tasks        Task[]\n  projectTeams ProjectTeam[]\n}\n\nmodel ProjectTeam {\n  id        Int     @id @default(autoincrement())\n  teamId    Int\n  projectId Int\n  team      Team    @relation(fields: [teamId], references: [id])\n  project   Project @relation(fields: [projectId], references: [id])\n}\n\nmodel Task {\n  id             Int       @id @default(autoincrement())\n  title          String\n  description    String?\n  status         String?\n  priority       String?\n  tags           String?\n  startDate      DateTime?\n  dueDate        DateTime?\n  points         Int?\n  projectId      Int\n  authorUserId   Int\n  assignedUserId Int?\n\n  project         Project          @relation(fields: [projectId], references: [id])\n  author          User             @relation(\"TaskAuthor\", fields: [authorUserId], references: [userId])\n  assignee        User?            @relation(\"TaskAssignee\", fields: [assignedUserId], references: [userId])\n  taskAssignments TaskAssignment[]\n  attachments     Attachment[]\n  comments        Comment[]\n}\n\nmodel TaskAssignment {\n  id     Int @id @default(autoincrement())\n  userId Int\n  taskId Int\n\n  user User @relation(fields: [userId], references: [userId])\n  task Task @relation(fields: [taskId], references: [id])\n}\n\nmodel Attachment {\n  id           Int     @id @default(autoincrement())\n  fileURL      String\n  fileName     String?\n  taskId       Int\n  uploadedById Int\n\n  task       Task @relation(fields: [taskId], references: [id])\n  uploadedBy User @relation(fields: [uploadedById], references: [userId])\n}\n\nmodel Comment {\n  id     Int    @id @default(autoincrement())\n  text   String\n  taskId Int\n  userId Int\n\n  task Task @relation(fields: [taskId], references: [id])\n  user User @relation(fields: [userId], references: [userId])\n}\n",
-  "inlineSchemaHash": "14d3a5b86595964347430d0b9a9788b03b5c75b32c841749ab3cfe94f1c4300c",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  userId            Int     @id @default(autoincrement())\n  cognitoId         String  @unique\n  username          String  @unique\n  profilePictureUrl String?\n  teamId            Int?\n\n  authoredTasks   Task[]           @relation(\"TaskAuthor\")\n  assignedTasks   Task[]           @relation(\"TaskAssignee\")\n  taskAssignments TaskAssignment[]\n  attachments     Attachment[]\n  comments        Comment[]\n  team            Team?            @relation(fields: [teamId], references: [id])\n}\n\nmodel Team {\n  id                   Int           @id @default(autoincrement())\n  teamName             String\n  productOwnerUserId   Int?\n  projectManagerUserId Int?\n  projectTeams         ProjectTeam[]\n  user                 User[]\n}\n\nmodel Project {\n  id           Int           @id @default(autoincrement())\n  name         String\n  description  String?\n  startDate    DateTime?\n  endDate      DateTime?\n  tasks        Task[]\n  projectTeams ProjectTeam[]\n}\n\nmodel ProjectTeam {\n  id        Int     @id @default(autoincrement())\n  teamId    Int\n  projectId Int\n  team      Team    @relation(fields: [teamId], references: [id])\n  project   Project @relation(fields: [projectId], references: [id])\n}\n\nmodel Task {\n  id             Int       @id @default(autoincrement())\n  title          String\n  description    String?\n  status         String?\n  priority       String?\n  tags           String?\n  startDate      DateTime?\n  dueDate        DateTime?\n  points         Int?\n  projectId      Int\n  authorUserId   Int\n  assignedUserId Int?\n\n  project         Project          @relation(fields: [projectId], references: [id])\n  author          User             @relation(\"TaskAuthor\", fields: [authorUserId], references: [userId])\n  assignee        User?            @relation(\"TaskAssignee\", fields: [assignedUserId], references: [userId])\n  taskAssignments TaskAssignment[]\n  attachments     Attachment[]\n  comments        Comment[]\n}\n\nmodel TaskAssignment {\n  id     Int @id @default(autoincrement())\n  userId Int\n  taskId Int\n\n  user User @relation(fields: [userId], references: [userId])\n  task Task @relation(fields: [taskId], references: [id])\n}\n\nmodel Attachment {\n  id           Int     @id @default(autoincrement())\n  fileURL      String\n  fileName     String?\n  taskId       Int\n  uploadedById Int\n\n  task       Task @relation(fields: [taskId], references: [id])\n  uploadedBy User @relation(fields: [uploadedById], references: [userId])\n}\n\nmodel Comment {\n  id     Int    @id @default(autoincrement())\n  text   String\n  taskId Int\n  userId Int\n\n  task Task @relation(fields: [taskId], references: [id])\n  user User @relation(fields: [userId], references: [userId])\n}\n",
+  "inlineSchemaHash": "6f846c8a68f09bc118787955e417018c9ac6f8abc7a0186f0042fb1c905ffe9b",
   "copyEngine": true
 }
 
