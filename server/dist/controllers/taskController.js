@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateTaskStatus = exports.createTask = exports.getTasks = void 0;
-const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient();
+const default_1 = require("../../prisma/generated/client/default");
+const prisma = new default_1.PrismaClient();
 const getTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { projectId } = req.query;
     try {

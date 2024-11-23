@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../prisma/generated/client/default";
 
 const prisma = new PrismaClient();
 
