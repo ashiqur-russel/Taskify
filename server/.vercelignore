@@ -1,4 +1,3 @@
 node_modules
-src
-prisma/*.ts
-prisma/schema.prisma
+dist
+prisma/migrations
