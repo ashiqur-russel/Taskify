@@ -11,7 +11,7 @@
         "seed": "ts-node prisma/seed.ts",
         "seed:prod": "node dist/prisma/seed.js",
         "postinstall": "prisma generate",
-        "vercel-build": "prisma generate && prisma migrate deploy && npm run build"
+        "vercel-build": "prisma generate&& prisma migrate deploy && npm run build"
     },
     "keywords": [],
     "author": "",
