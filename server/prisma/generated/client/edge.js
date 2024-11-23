@@ -210,7 +210,8 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
   "clientVersion": "5.21.1",
@@ -219,17 +220,16 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
+        "fromEnvVar": "POSTGRES_PRISMA_URL",
         "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  userId            Int     @id @default(autoincrement())\n  cognitoId         String  @unique\n  username          String  @unique\n  profilePictureUrl String?\n  teamId            Int?\n\n  authoredTasks   Task[]           @relation(\"TaskAuthor\")\n  assignedTasks   Task[]           @relation(\"TaskAssignee\")\n  taskAssignments TaskAssignment[]\n  attachments     Attachment[]\n  comments        Comment[]\n  team            Team?            @relation(fields: [teamId], references: [id])\n}\n\nmodel Team {\n  id                   Int           @id @default(autoincrement())\n  teamName             String\n  productOwnerUserId   Int?\n  projectManagerUserId Int?\n  projectTeams         ProjectTeam[]\n  user                 User[]\n}\n\nmodel Project {\n  id           Int           @id @default(autoincrement())\n  name         String\n  description  String?\n  startDate    DateTime?\n  endDate      DateTime?\n  tasks        Task[]\n  projectTeams ProjectTeam[]\n}\n\nmodel ProjectTeam {\n  id        Int     @id @default(autoincrement())\n  teamId    Int\n  projectId Int\n  team      Team    @relation(fields: [teamId], references: [id])\n  project   Project @relation(fields: [projectId], references: [id])\n}\n\nmodel Task {\n  id             Int       @id @default(autoincrement())\n  title          String\n  description    String?\n  status         String?\n  priority       String?\n  tags           String?\n  startDate      DateTime?\n  dueDate        DateTime?\n  points         Int?\n  projectId      Int\n  authorUserId   Int\n  assignedUserId Int?\n\n  project         Project          @relation(fields: [projectId], references: [id])\n  author          User             @relation(\"TaskAuthor\", fields: [authorUserId], references: [userId])\n  assignee        User?            @relation(\"TaskAssignee\", fields: [assignedUserId], references: [userId])\n  taskAssignments TaskAssignment[]\n  attachments     Attachment[]\n  comments        Comment[]\n}\n\nmodel TaskAssignment {\n  id     Int @id @default(autoincrement())\n  userId Int\n  taskId Int\n\n  user User @relation(fields: [userId], references: [userId])\n  task Task @relation(fields: [taskId], references: [id])\n}\n\nmodel Attachment {\n  id           Int     @id @default(autoincrement())\n  fileURL      String\n  fileName     String?\n  taskId       Int\n  uploadedById Int\n\n  task       Task @relation(fields: [taskId], references: [id])\n  uploadedBy User @relation(fields: [uploadedById], references: [userId])\n}\n\nmodel Comment {\n  id     Int    @id @default(autoincrement())\n  text   String\n  taskId Int\n  userId Int\n\n  task Task @relation(fields: [taskId], references: [id])\n  user User @relation(fields: [userId], references: [userId])\n}\n",
-  "inlineSchemaHash": "6f846c8a68f09bc118787955e417018c9ac6f8abc7a0186f0042fb1c905ffe9b",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"POSTGRES_PRISMA_URL\")\n}\n\nmodel User {\n  userId            Int     @id @default(autoincrement())\n  cognitoId         String  @unique\n  username          String  @unique\n  profilePictureUrl String?\n  teamId            Int?\n\n  authoredTasks   Task[]           @relation(\"TaskAuthor\")\n  assignedTasks   Task[]           @relation(\"TaskAssignee\")\n  taskAssignments TaskAssignment[]\n  attachments     Attachment[]\n  comments        Comment[]\n  team            Team?            @relation(fields: [teamId], references: [id])\n}\n\nmodel Team {\n  id                   Int           @id @default(autoincrement())\n  teamName             String\n  productOwnerUserId   Int?\n  projectManagerUserId Int?\n  projectTeams         ProjectTeam[]\n  user                 User[]\n}\n\nmodel Project {\n  id           Int           @id @default(autoincrement())\n  name         String\n  description  String?\n  startDate    DateTime?\n  endDate      DateTime?\n  tasks        Task[]\n  projectTeams ProjectTeam[]\n}\n\nmodel ProjectTeam {\n  id        Int     @id @default(autoincrement())\n  teamId    Int\n  projectId Int\n  team      Team    @relation(fields: [teamId], references: [id])\n  project   Project @relation(fields: [projectId], references: [id])\n}\n\nmodel Task {\n  id             Int       @id @default(autoincrement())\n  title          String\n  description    String?\n  status         String?\n  priority       String?\n  tags           String?\n  startDate      DateTime?\n  dueDate        DateTime?\n  points         Int?\n  projectId      Int\n  authorUserId   Int\n  assignedUserId Int?\n\n  project         Project          @relation(fields: [projectId], references: [id])\n  author          User             @relation(\"TaskAuthor\", fields: [authorUserId], references: [userId])\n  assignee        User?            @relation(\"TaskAssignee\", fields: [assignedUserId], references: [userId])\n  taskAssignments TaskAssignment[]\n  attachments     Attachment[]\n  comments        Comment[]\n}\n\nmodel TaskAssignment {\n  id     Int @id @default(autoincrement())\n  userId Int\n  taskId Int\n\n  user User @relation(fields: [userId], references: [userId])\n  task Task @relation(fields: [taskId], references: [id])\n}\n\nmodel Attachment {\n  id           Int     @id @default(autoincrement())\n  fileURL      String\n  fileName     String?\n  taskId       Int\n  uploadedById Int\n\n  task       Task @relation(fields: [taskId], references: [id])\n  uploadedBy User @relation(fields: [uploadedById], references: [userId])\n}\n\nmodel Comment {\n  id     Int    @id @default(autoincrement())\n  text   String\n  taskId Int\n  userId Int\n\n  task Task @relation(fields: [taskId], references: [id])\n  user User @relation(fields: [userId], references: [userId])\n}\n",
+  "inlineSchemaHash": "c7c3e8ea5ff670ff8186995ce3cfbf0763f417afc8386b2f3c5163a767267665",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -240,7 +240,7 @@ config.engineWasm = undefined
 
 config.injectableEdgeEnv = () => ({
   parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
+    POSTGRES_PRISMA_URL: typeof globalThis !== 'undefined' && globalThis['POSTGRES_PRISMA_URL'] || typeof process !== 'undefined' && process.env && process.env.POSTGRES_PRISMA_URL || undefined
   }
 })
 
