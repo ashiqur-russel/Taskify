@@ -1,15 +1,14 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "dist/index.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/index.js"
-    }
-  ]
+    "version": 2,
+    "env": {
+        "POSTGRES_PRISMA_URL": "postgres://default:YRmgMb5r6XEI@ep-wild-violet-a2e9qkoo-pooler.eu-central-1.aws.neon.tech/verceldb?pgbouncer=true&connect_timeout=15&sslmode=require"
+    },
+    "builds": [{
+        "src": "dist/index.js",
+        "use": "@vercel/node"
+    }],
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "dist/index.js"
+    }]
 }
