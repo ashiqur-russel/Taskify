@@ -101,7 +101,7 @@ function Sidebar() {
                 key={project.id}
                 icon={Briefcase}
                 label={project.name}
-                href={`/projects/${project.id}`}
+                href={`/projects/${project.name}`}
               />
             ))}
         </div>

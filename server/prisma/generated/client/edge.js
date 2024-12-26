@@ -192,7 +192,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/ashiq/Desktop/project/taskify/Next-Taskify/server/prisma/generated/client",
+      "value": "/Users/ashiqur/Desktop/Projects/taskify/Next-Taskify/server/prisma/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -201,12 +201,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin",
+        "value": "darwin-arm64",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/ashiq/Desktop/project/taskify/Next-Taskify/server/prisma/schema.prisma",
+    "sourceFilePath": "/Users/ashiqur/Desktop/Projects/taskify/Next-Taskify/server/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -220,7 +220,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
