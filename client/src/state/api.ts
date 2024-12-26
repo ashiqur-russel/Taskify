@@ -61,6 +61,20 @@ export interface Task {
   attachments?: Attachment[];
 }
 
+export interface Team {
+  teamId: number;
+  teamName: string;
+  productOwnerUserId?: number;
+  projectManagerUserId?: number;
+}
+
+
+export interface SearchResults {
+  tasks?: Task[];
+  projects?: Project[];
+  users?: User[];
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   tagTypes: ["Projects", "Tasks", "Users", "Teams"],
@@ -71,7 +85,48 @@ export const api = createApi({
       query: () => "projects",
       providesTags: ["Projects"],
     }),
+
+    createProject: build.mutation<Project, Partial<Project>>({
+      query:(project)=>({
+        url:"projects",
+        method:"POST",
+        body: project,
+      }),
+      invalidatesTags:['Projects']
+    }),
+    getTasks: build.query<Task[], { projectId: number }>({
+      query: ({ projectId }) => `tasks?projectId=${projectId}`,
+      providesTags: (result) =>
+        result
+          ? result.map(({ id }) => ({ type: "Tasks" as const, id }))
+          : [{ type: "Tasks" as const }],
+    }),
+    createTask: build.mutation<Task, Partial<Task>>({
+      query: (task) => ({
+        url: "tasks",
+        method: "POST",
+        body: task,
+      }),
+      invalidatesTags: ["Tasks"],
+    }),
+    updateTaskStatus: build.mutation<Task, { taskId: number; status: string }>({
+      query: ({ taskId, status }) => ({
+        url: `tasks/${taskId}/status`,
+        method: "PATCH",
+        body: { status },
+      }),
+      invalidatesTags: (result, error, { taskId }) => [
+        { type: "Tasks", id: taskId },
+      ],
+    }),
+  
+   
   }),
 });
 
-export const { useGetProjectsQuery } = api;
+export const { 
+  useGetProjectsQuery,
+  useCreateProjectMutation,
+  useCreateTaskMutation,
+  useUpdateTaskStatusMutation,
+} = api;
