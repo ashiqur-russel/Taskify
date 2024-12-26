@@ -8,6 +8,7 @@ import {
   Share2,
   Table,
 } from "lucide-react";
+import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
 type Props = {
@@ -18,11 +19,15 @@ type Props = {
 const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
   const [isModalNewProjectOpen, setIsModalNewProjectOpen] = useState(false);
 
+ 
+  const params = useParams();
+  const name = params?.name;
+
   return (
     <div className="px-4 xl:px-6">
       <div className="pb-6 pt-6 lg:pb-4 lg:pt-8">
         <Header
-          name="Product Design Development"
+          name={`Project - #${name}`}
           buttonComponent={
             <button
               className="flex items-center rounded-md bg-[#ee7e34] px-3 py-2 text-white hover:bg-[#ee7e34]"
