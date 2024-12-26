@@ -21,7 +21,6 @@ const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
 
   const params = useParams();
   const id = params?.id;
-  console.log('-----', typeof id);
 
   return (
     <div className='px-4 xl:px-6'>

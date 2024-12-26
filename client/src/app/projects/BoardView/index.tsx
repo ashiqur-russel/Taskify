@@ -196,69 +196,63 @@ export const Task = ({ task }: TaskProps) => {
             </div>
           </div>
 
-          <button className="flex h-6 w-4 flex-shrink-0 items-center justify-center dark:text-neutral-500">
+          <button className='flex h-6 w-4 flex-shrink-0 items-center justify-center dark:text-neutral-500'>
             <EllipsisVertical size={26} />
           </button>
-
-
         </div>
 
-        <div className="my-3 flex justify-between">
-          <h4 className="text-md font-bold dark:text-white">{task.title}</h4>
-          {typeof task.points === "number" && (
-            <div className="text-xs font-semibold dark:text-white">
+        <div className='my-3 flex justify-between'>
+          <h4 className='text-md font-bold dark:text-white'>{task.title}</h4>
+          {typeof task.points === 'number' && (
+            <div className='text-xs font-semibold dark:text-white'>
               {task.points} pt
             </div>
           )}
         </div>
 
-        <div className="text-xs text-gray-500 dark:text-neutral-500">
+        <div className='text-xs text-gray-500 dark:text-neutral-500'>
           {formattedStartDate && <span>{formattedStartDate} - </span>}
           {formattedDueDate && <span>{formattedDueDate}</span>}
         </div>
 
-        <p className="text-sm text-gray-600 dark:text-neutral-500">
+        <p className='text-sm text-gray-600 dark:text-neutral-500'>
           {task.description}
         </p>
-        <div className="mt-4 border-t border-gray-200 dark:border-stroke-dark" />
+        <div className='mt-4 border-t border-gray-200 dark:border-stroke-dark' />
 
-              {/* From here Users assign part */}
+        {/* From here Users assign part */}
 
-              <div className="mt-3 flex items-center justify-between">
-              <div className="flex -space-x-[6px] overflow-hidden">
-              {task.assignee && (
+        <div className='mt-3 flex items-center justify-between'>
+          <div className='flex -space-x-[6px] overflow-hidden'>
+            {task.assignee && (
               <Image
                 key={task.assignee.userId}
                 src={`/${task.assignee.profilePictureUrl!}`}
                 alt={task.assignee.username}
                 width={30}
                 height={30}
-                className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"
+                className='h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary'
               />
             )}
- {task.author && (
+            {task.author && (
               <Image
                 key={task.author.userId}
                 src={`/${task.author.profilePictureUrl!}`}
                 alt={task.author.username}
                 width={30}
                 height={30}
-                className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"
+                className='h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary'
               />
             )}
+          </div>
 
-              </div>
-
-              <div className="flex items-center text-gray-500 dark:text-neutral-500">
-              <MessageSquareMore size={20} />
-              <span className="ml-1 text-sm dark:text-neutral-400">
+          <div className='flex items-center text-gray-500 dark:text-neutral-500'>
+            <MessageSquareMore size={20} />
+            <span className='ml-1 text-sm dark:text-neutral-400'>
               {numberOfComments}
             </span>
-              </div>
-
-
-              </div>
-
+          </div>
+        </div>
       </div>
     </div>
   );
