@@ -75,7 +75,7 @@ export interface SearchResults {
 }
 
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_LOCAL_URL }),
   tagTypes: ['Projects', 'Tasks', 'Users', 'Teams'],
   reducerPath: 'api',
 
