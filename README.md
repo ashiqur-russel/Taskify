@@ -1,7 +1,8 @@
 
 <div align="center">
 
-![image](https://github.com/user-attachments/assets/c32f8a4d-e037-413e-a974-18c81ef45c45)
+![logo](https://github.com/ashiqur-russel/Taskify/blob/master/client/public/taskify-logo.png)
+
 
 
   <p align="center">
@@ -19,8 +20,6 @@ TASKiFY is a project management dashboard app built with **Next.js**. It allows 
 </div>
 
 ## About The Project
-![product-image-1](https://github.com/user-attachments/assets/d1933fda-d46a-4eda-82cd-88df0158bcb7)
-
 
 TASKiFY is designed to simplify project management by providing a powerful, intuitive interface with features like dark/light themes, task tracking, and real-time collaboration for teams.
 
@@ -69,6 +68,11 @@ This data model is designed to provide **scalability** and **efficiency** for te
 - **Collaboration**: Comments and attachments allow for smooth communication and file sharing within tasks.
 - **Project Overview**: Managers can easily track which teams are working on specific projects and monitor progress.
 
+## Product Images
+  ![product-image-2](https://github.com/ashiqur-russel/Taskify/blob/master/client/public/taskify-client-2.png.png)
+![product-image-1](https://github.com/ashiqur-russel/Taskify/blob/master/client/public/taskify-client-1.png)
+
+
 
 ## Work In Progress 🚧
 
@@ -110,7 +114,6 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-![alt text](https://github.com/ashiqur-russel/Taskify/blob/master/client/public/er-diagram.png)
 
 
 [stars-shield]: https://img.shields.io/github/stars/ashiqur-russel/Next-Taskify.svg?style=for-the-badge
