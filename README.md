@@ -32,9 +32,8 @@ The **TASKiFY** data model is the backbone of the project management system, all
 
 The following is a representation of the key entities in **TASKiFY** and how they relate to each other. The data model allows teams to collaborate effectively on tasks and projects.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/e1e83712-6620-42be-b144-f6deeb873777" alt="ER Diagram" width="600">
-</p>
+![image](https://github.com/ashiqur-russel/Taskify/blob/master/client/public/er-diagram.png)
+
 
 ### Key Entities and Fields
 
@@ -110,6 +109,10 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
+
+![alt text](https://github.com/ashiqur-russel/Taskify/blob/master/client/public/er-diagram.png)
+
+
 [stars-shield]: https://img.shields.io/github/stars/ashiqur-russel/Next-Taskify.svg?style=for-the-badge
 [stars-url]: https://github.com/ashiqur-russel/Next-Taskify/stargazers
 [issues-shield]: https://img.shields.io/github/issues/ashiqur-russel/Next-Taskify.svg?style=for-the-badge
