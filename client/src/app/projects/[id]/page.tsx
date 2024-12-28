@@ -20,7 +20,7 @@ const Project = () => {
         {activeTab === 'Board' && (
           <Board id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
         )}
-         {activeTab === 'List' && (
+        {activeTab === 'List' && (
           <List id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
         )}
       </div>
