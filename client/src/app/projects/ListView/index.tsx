@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import { useGetTasksQuery } from '@/state/api';
+import { Priority, Status, useGetTasksQuery } from '@/state/api';
 import Image from 'next/image';
 import React from 'react';
 import { format } from 'date-fns';
@@ -58,21 +58,49 @@ function ListView({ id, setIsModalNewTaskOpen }: ListProps) {
                   />
                 )}
               </div>
-              <h3 className='mb-2 text-lg font-semibold text-gray-900 dark:text-white'>
+              <div className='mt-2 mb-4 flex space-x-2 justify-between items-center'>
+              <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
                 {task.title || 'Untitled Task'}
+
+            
               </h3>
+              <span
+                  className={`rounded px-2 py-1 ${
+                    task.status === Status.ToDo
+                      ? 'bg-blue-200 text-blue-700'
+                      : task.status === Status.WorkInProgress
+                        ? 'bg-yellow-200 text-yellow-700'
+                        : task.status === Status.UnderReview
+                          ? 'bg-purple-200 text-purple-700'
+                          : task.status === Status.Completed
+                            ? 'bg-green-200 text-green-700'
+                            : 'bg-gray-200 text-gray-700'
+                  }`}
+                >
+                  {task.status || 'Unknown Status'}
+                </span>
+</div>
+              
               <p className='text-sm text-gray-600 dark:text-gray-400'>
                 {task.description || 'No description provided'}
               </p>
               <div className='mt-4 flex flex-wrap space-x-2 text-xs'>
                 <span
                   className={`rounded px-2 py-1 ${
-                    task.priority === 'High'
-                      ? 'bg-red-100 text-red-800'
-                      : 'bg-blue-100 text-blue-800'
+                    task.priority === Priority.Urgent
+                      ? 'bg-red-200 text-red-700'
+                      : task.priority === Priority.High
+                        ? 'bg-yellow-200 text-yellow-700'
+                        : task.priority === Priority.Medium
+                          ? 'bg-green-200 text-green-700'
+                          : task.priority === Priority.Low
+                            ? 'bg-blue-200 text-blue-700'
+                            : task.priority === Priority.Backlog
+                              ? 'bg-purple-200 text-purple-700'
+                              : 'bg-gray-200 text-gray-700'
                   }`}
                 >
-                  {task.priority}
+                  {task.priority || 'Unknown Priority'}
                 </span>
                 {task.tags &&
                   task.tags.split(',').map((tag) => (
@@ -107,6 +135,10 @@ function ListView({ id, setIsModalNewTaskOpen }: ListProps) {
                   <strong>Assignee:</strong>{' '}
                   {task.assignee ? task.assignee.username : 'Unassigned'}
                 </p>
+              </div>
+
+              <div className='mt-2 flex items-center space-x-2'>
+                     ....
               </div>
             </div>
           ))}
