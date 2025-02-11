@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import Board from '../BoardView';
 import List from '../ListView';
 import Timeline from '../TimeLineView';
+import Table from '../TableView';
 
 const Project = () => {
   const [activeTab, setActiveTab] = useState('Board');
@@ -27,6 +28,10 @@ const Project = () => {
 
         {activeTab === 'Timeline' && (
           <Timeline id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
+        )}
+
+        {activeTab === 'Table' && (
+          <Table id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
         )}
       </div>
     </div>
