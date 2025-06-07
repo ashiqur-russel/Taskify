@@ -30,7 +30,7 @@ function ListView({ id, setIsModalNewTaskOpen }: ListProps) {
           name='List'
           buttonComponent={
             <button
-              className='flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600'
+              className='flex items-center rounded bg-orange-400-primary px-3 py-2 text-white hover:bg-orange-500'
               onClick={() => setIsModalNewTaskOpen(true)}
             >
               Add Task
@@ -59,46 +59,44 @@ function ListView({ id, setIsModalNewTaskOpen }: ListProps) {
                 )}
               </div>
               <div className='mt-2 mb-4 flex space-x-2 justify-between items-center'>
-              <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
-                {task.title || 'Untitled Task'}
+                <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
+                  {task.title || 'Untitled Task'}
 
-            
-              </h3>
-              <span
-                  className={`rounded px-2 py-1 ${
-                    task.status === Status.ToDo
-                      ? 'bg-blue-200 text-blue-700'
-                      : task.status === Status.WorkInProgress
-                        ? 'bg-yellow-200 text-yellow-700'
-                        : task.status === Status.UnderReview
-                          ? 'bg-purple-200 text-purple-700'
-                          : task.status === Status.Completed
-                            ? 'bg-green-200 text-green-700'
-                            : 'bg-gray-200 text-gray-700'
-                  }`}
+
+                </h3>
+                <span
+                  className={`rounded px-2 py-1 ${task.status === Status.ToDo
+                    ? 'bg-blue-200 text-blue-700'
+                    : task.status === Status.WorkInProgress
+                      ? 'bg-yellow-200 text-yellow-700'
+                      : task.status === Status.UnderReview
+                        ? 'bg-purple-200 text-purple-700'
+                        : task.status === Status.Completed
+                          ? 'bg-green-200 text-green-700'
+                          : 'bg-gray-200 text-gray-700'
+                    }`}
                 >
                   {task.status || 'Unknown Status'}
                 </span>
-</div>
-              
+              </div>
+
               <p className='text-sm text-gray-600 dark:text-gray-400'>
                 {task.description || 'No description provided'}
               </p>
               <div className='mt-4 flex flex-wrap space-x-2 text-xs'>
                 <span
-                  className={`rounded px-2 py-1 ${
-                    task.priority === Priority.Urgent
-                      ? 'bg-red-200 text-red-700'
-                      : task.priority === Priority.High
-                        ? 'bg-yellow-200 text-yellow-700'
-                        : task.priority === Priority.Medium
-                          ? 'bg-green-200 text-green-700'
-                          : task.priority === Priority.Low
-                            ? 'bg-blue-200 text-blue-700'
-                            : task.priority === Priority.Backlog
-                              ? 'bg-purple-200 text-purple-700'
-                              : 'bg-gray-200 text-gray-700'
-                  }`}
+                  className={`rounded px-2 py-1 ${task.priority === Priority.Urgent
+                    ? 'bg-red-200 text-red-700'
+                    : task.priority === Priority.High
+                      ? 'bg-yellow-200 text-yellow-700'
+                      : task.priority === Priority.Medium
+                        ? 'bg-green-200 text-green-700'
+                        : task.priority === Priority.Low
+                          ? 'bg-blue-200 text-blue-700'
+                          : task.priority === Priority.Backlog
+                            ? 'bg-purple-200 text-purple-700'
+                            : 'bg-gray-200 text-gray-700'
+                    }`}
                 >
                   {task.priority || 'Unknown Priority'}
                 </span>
@@ -138,7 +136,7 @@ function ListView({ id, setIsModalNewTaskOpen }: ListProps) {
               </div>
 
               <div className='mt-2 flex items-center space-x-2'>
-                     ....
+                ....
               </div>
             </div>
           ))}
