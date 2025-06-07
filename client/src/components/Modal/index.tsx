@@ -19,10 +19,10 @@ const Modal = ({ children, isOpen, onClose, name }: Props) => {
                     name={name || 'Modal Title'}
                     buttonComponent={
                         <button
-                            className='flex items-center rounded-md bg-[#ee7e34] px-3 py-2 text-white hover:bg-[#ee7e34]'
+                            className='flex items-center justify-center hover:dark: rounded-full bg-[#ee7e34]  text-white hover:bg-[#ee7e34]'
                             onClick={onClose}
                         >
-                            <X size={20} className='mr-2' />
+                            <X size={20} />
 
                         </button>
 
