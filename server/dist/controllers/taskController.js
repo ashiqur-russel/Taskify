@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateTaskStatus = exports.createTask = exports.getTasks = void 0;
-const default_1 = require("../../prisma/generated/client/default");
-const prisma = new default_1.PrismaClient();
+exports.getUserTasks = exports.updateTaskStatus = exports.createTask = exports.getTasks = void 0;
+const client_1 = require("@prisma/client");
+const prisma = new client_1.PrismaClient();
 const getTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { projectId } = req.query;
     try {
@@ -36,8 +36,22 @@ const getTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getTasks = getTasks;
 const createTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, description, status, priority, tags, startDate, dueDate, points, projectId, authorUserId, assignedUserId, } = req.body;
+    const { title, description, status, priority, tags, startDate, dueDate, projectId, authorUserId, assignedUserId, } = req.body;
     try {
+        console.log("Creating task with data:");
+        console.log(title, description, status, priority, tags, startDate, dueDate, projectId, authorUserId, assignedUserId);
+        if (!projectId || !authorUserId || !assignedUserId) {
+            res.status(400).json({ message: "Project ID, Author User ID, and Assigned User ID are required" });
+            return;
+        }
+        if (assignedUserId === authorUserId) {
+            res.status(400).json({ message: "Assigned User ID cannot be the same as Author User ID" });
+            return;
+        }
+        if (!title || !status || !priority) {
+            res.status(400).json({ message: "Title, status, and priority are required" });
+            return;
+        }
         const newTask = yield prisma.task.create({
             data: {
                 title,
@@ -45,9 +59,9 @@ const createTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 status,
                 priority,
                 tags,
-                startDate,
-                dueDate,
-                points,
+                startDate: new Date('2023-01-10T00:00:00.000Z'), // Date format
+                dueDate: new Date('2023-01-10T00:00:00.000Z'), // Date format
+                points: 0, // Default points, can be adjusted later
                 projectId,
                 authorUserId,
                 assignedUserId,
@@ -56,9 +70,8 @@ const createTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.status(201).json(newTask);
     }
     catch (error) {
-        res
-            .status(500)
-            .json({ message: `Error creating a task: ${error.message}` });
+        console.error("Error creating task:", error);
+        res.status(500).json({ message: `Error creating task: ${error.message}` });
     }
 });
 exports.createTask = createTask;
@@ -77,7 +90,32 @@ const updateTaskStatus = (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.json(updatedTask);
     }
     catch (error) {
-        res.status(500).json({ message: `Error updating task: ${error.message}` });
+        console.error("Error creating task:", error); // Add this
+        res.status(500).json({ message: `Error creating a task: ${error.message}` });
     }
 });
 exports.updateTaskStatus = updateTaskStatus;
+const getUserTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.params;
+    try {
+        const tasks = yield prisma.task.findMany({
+            where: {
+                OR: [
+                    { authorUserId: Number(userId) },
+                    { assignedUserId: Number(userId) },
+                ],
+            },
+            include: {
+                author: true,
+                assignee: true,
+            },
+        });
+        res.json(tasks);
+    }
+    catch (error) {
+        res
+            .status(500)
+            .json({ message: `Error retrieving user's tasks: ${error.message}` });
+    }
+});
+exports.getUserTasks = getUserTasks;
