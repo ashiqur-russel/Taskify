@@ -23,27 +23,47 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
     const [projectId, setProjectId] = useState("");
 
     const handleSubmit = async () => {
-        if (!title || !authorUserId || !(id !== null || projectId)) return;
+        try {
 
-        const formattedStartDate = formatISO(new Date(startDate), {
-            representation: "complete",
-        });
-        const formattedDueDate = formatISO(new Date(dueDate), {
-            representation: "complete",
-        });
+            if (!title || !authorUserId || !(id !== null || projectId)) return;
 
-        await createTask({
-            title,
-            description,
-            status,
-            priority,
-            tags,
-            startDate: formattedStartDate,
-            dueDate: formattedDueDate,
-            authorUserId: parseInt(authorUserId),
-            assignedUserId: parseInt(assignedUserId),
-            projectId: id !== null ? Number(id) : Number(projectId),
-        });
+            const formattedStartDate = formatISO(new Date(startDate), {
+                representation: "complete",
+            });
+            const formattedDueDate = formatISO(new Date(dueDate), {
+                representation: "complete",
+            });
+
+            await createTask({
+                title,
+                description,
+                status,
+                priority,
+                tags,
+                startDate: formattedStartDate,
+                dueDate: formattedDueDate,
+                authorUserId: parseInt(authorUserId),
+                assignedUserId: parseInt(assignedUserId),
+                projectId: id !== null ? Number(id) : Number(projectId),
+            });
+
+            onClose();
+
+            setTitle("");
+            setDescription("");
+            setStatus(Status.ToDo);
+            setPriority(Priority.Backlog);
+            setTags("");
+            setStartDate("");
+            setDueDate("");
+            setAuthorUserId("");
+            setAssignedUserId("");
+            setProjectId("");
+
+        } catch (error) {
+            console.error("Failed to create task:", error);
+
+        }
     };
 
     const isFormValid = () => {
