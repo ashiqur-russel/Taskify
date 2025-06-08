@@ -2,7 +2,8 @@
 
 import Header from '@/components/Header';
 import { useSearchQuery } from '@/state/api';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { debounce } from 'lodash';
 
 type Props = {}
 
@@ -16,10 +17,16 @@ const Search = (props: Props) => {
         skip: searchTerm.length < 3,
     });
 
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(event.target.value);
-    };
+    const handleSearch = debounce(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            setSearchTerm(event.target.value);
+        },
+        500,
+    );
 
+    useEffect(() => {
+        return handleSearch.cancel;
+    }, [handleSearch.cancel]);
 
     return (
         <div className="p-8">
@@ -37,7 +44,12 @@ const Search = (props: Props) => {
                 {isError && <p>Error occurred while fetching search results.</p>}
                 {!isLoading && !isError && searchResults && (
                     <div>
-
+                        {searchResults.tasks && searchResults.tasks?.length > 0 && (
+                            <h2>Tasks</h2>
+                        )}
+                        {searchResults.tasks?.map((task) => (
+                            <TaskCard key={task.id} task={task} />
+                        ))}
                     </div>
                 )}
             </div>
