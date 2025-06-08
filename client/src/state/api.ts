@@ -129,5 +129,6 @@ export const {
   useCreateProjectMutation,
   useCreateTaskMutation,
   useGetTasksQuery,
+  useSearchQuery,
   useUpdateTaskStatusMutation,
 } = api;
