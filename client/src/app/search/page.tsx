@@ -4,6 +4,9 @@ import Header from '@/components/Header';
 import { useSearchQuery } from '@/state/api';
 import React, { useEffect, useState } from 'react'
 import { debounce } from 'lodash';
+import TaskCard from '@/components/TaskCard';
+import UserCard from '@/components/UserCard';
+import ProjectCard from '@/components/ProjectCard';
 
 type Props = {}
 
@@ -49,6 +52,23 @@ const Search = (props: Props) => {
                         )}
                         {searchResults.tasks?.map((task) => (
                             <TaskCard key={task.id} task={task} />
+                        ))}
+                        {searchResults.tasks?.map((task) => (
+                            <TaskCard key={task.id} task={task} />
+                        ))}
+
+                        {searchResults.projects && searchResults.projects?.length > 0 && (
+                            <h2>Projects</h2>
+                        )}
+                        {searchResults.projects?.map((project) => (
+                            <ProjectCard key={project.id} project={project} />
+                        ))}
+
+                        {searchResults.users && searchResults.users?.length > 0 && (
+                            <h2>Users</h2>
+                        )}
+                        {searchResults.users?.map((user) => (
+                            <UserCard key={user.userId} user={user} />
                         ))}
                     </div>
                 )}
