@@ -7,14 +7,11 @@ import { DisplayOption, Gantt, ViewMode } from 'gantt-task-react';
 import 'gantt-task-react/dist/index.css';
 import React, { useMemo, useState } from 'react';
 
-type Props = {
-    id: string;
-    setIsModalNewTaskOpen: (isOpen: boolean) => void;
-};
+
 
 type TaskTypeItems = 'task' | 'milestone' | 'project';
 
-const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
+const Timeline = () => {
     const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
     const { data: projects, isLoading, isError } = useGetProjectsQuery();
 
