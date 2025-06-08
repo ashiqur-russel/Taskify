@@ -118,6 +118,9 @@ export const api = createApi({
         { type: 'Tasks', id: taskId },
       ],
     }),
+     search: build.query<SearchResults, string>({
+      query: (query) => `search?query=${query}`,
+    }),
   }),
 });
 
@@ -126,5 +129,6 @@ export const {
   useCreateProjectMutation,
   useCreateTaskMutation,
   useGetTasksQuery,
+  useSearchQuery,
   useUpdateTaskStatusMutation,
 } = api;
