@@ -19,7 +19,7 @@ const Project = () => {
 
   return (
     <div className='px-4 xl:px-6'>
-      <ModalNewTask isOpen={isModalNewTaskOpen} onClose={() => setIsModalNewTaskOpen(false)} />
+      <ModalNewTask isOpen={isModalNewTaskOpen} onClose={() => setIsModalNewTaskOpen(false)} id={id} />
       <div className='pb-6 pt-6 lg:pb-4 lg:pt-8'>
         <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
         {activeTab === 'Board' && (
