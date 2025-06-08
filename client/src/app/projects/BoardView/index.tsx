@@ -103,9 +103,7 @@ const TaskColumn = ({
               {' '}
               <EllipsisVertical size={26} />
             </button>
-            <button className='flex h-6 w-6 items-center justify-center rounded bg-gray-200 dark:bg-dark-tertiary dark:text-white'
-              onClick={() => setIsModalNewTaskOpen(true)}
-            >
+            <button className='flex h-6 w-6 items-center justify-center rounded bg-gray-200 dark:bg-dark-tertiary dark:text-white'>
               <Plus size={16} />
             </button>
           </div>
@@ -146,16 +144,17 @@ export const Task = ({ task }: TaskProps) => {
 
   const PriorityTag = ({ priority }: { priority: TaskType['priority'] }) => (
     <div
-      className={`rounded-full px-2 py-1 text-xs font-semibold ${priority === 'Urgent'
-        ? 'bg-red-200 text-red-700'
-        : priority === 'High'
-          ? 'bg-yellow-200 text-yellow-700'
-          : priority === 'Medium'
-            ? 'bg-green-200 text-green-700'
-            : priority === 'Low'
-              ? 'bg-blue-200 text-blue-700'
-              : 'bg-gray-200 text-gray-700'
-        }`}
+      className={`rounded-full px-2 py-1 text-xs font-semibold ${
+        priority === 'Urgent'
+          ? 'bg-red-200 text-red-700'
+          : priority === 'High'
+            ? 'bg-yellow-200 text-yellow-700'
+            : priority === 'Medium'
+              ? 'bg-green-200 text-green-700'
+              : priority === 'Low'
+                ? 'bg-blue-200 text-blue-700'
+                : 'bg-gray-200 text-gray-700'
+      }`}
     >
       {priority}
     </div>
@@ -166,8 +165,9 @@ export const Task = ({ task }: TaskProps) => {
       ref={(instance) => {
         drag(instance);
       }}
-      className={`mb-4 rounded-md bg-white shadow dark:bg-dark-secondary ${isDragging ? 'opacity-50' : 'opacity-100'
-        }`}
+      className={`mb-4 rounded-md bg-white shadow dark:bg-dark-secondary ${
+        isDragging ? 'opacity-50' : 'opacity-100'
+      }`}
     >
       {task.attachments && task.attachments.length > 0 && (
         <Image
